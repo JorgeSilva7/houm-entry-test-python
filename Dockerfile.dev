@@ -1,0 +1,21 @@
+############################################################
+# Dockerfile to run a Django-based web application
+# Based on an AMI
+############################################################
+# Set the base image to use to Ubuntu
+FROM python:3.9-slim
+# install nginx and another dependencies
+ENV ENV local
+RUN apt-get update && apt-get install gcc vim -y
+RUN apt-get install libpq-dev python3-dev -y
+
+# copy source and install dependencies
+RUN mkdir -p /opt/app
+RUN mkdir -p /opt/app/houm_test
+COPY requirements.txt /opt/app/
+COPY manage.py /opt/app/
+COPY houm_test /opt/app/houm_test
+WORKDIR /opt/app
+RUN pip install -r requirements.txt --cache-dir /opt/app/__pycache__
+
+RUN python manage.py migrate
