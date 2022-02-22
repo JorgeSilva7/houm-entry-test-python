@@ -7,7 +7,7 @@ from houmer.services.property.property_service import PropertyService
 from houmer.utils.common_utilities import CommonUtilities
 
 
-class PropertyView(viewsets.ModelViewSet):
+class MoveView(viewsets.ModelViewSet):
     """."""
 
     def create(self, request, *args, **kwargs):
@@ -22,7 +22,7 @@ class PropertyView(viewsets.ModelViewSet):
     def list_by_logged(self, request, *args, **kwargs):
 
         user = CommonUtilities.get_user(request)
-        service_response = PropertyService().list_by_logged(request, user)
+        service_response = PropertyService().list_by_logged(user)
 
         to_response = PropertySerializer(service_response, many=True).data
 

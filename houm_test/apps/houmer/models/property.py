@@ -12,7 +12,7 @@ class Property(models.Model):
     coordinates = JSONField(default=dict, blank=False)
 
     def __str__(self):
-        return self.name
+        return '{} - {}'.format(self.name, self.houmer.name)
 
     class Meta:
         app_label = 'houmer'
