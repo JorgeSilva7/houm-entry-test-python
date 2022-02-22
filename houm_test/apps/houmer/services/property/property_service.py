@@ -1,13 +1,16 @@
 from rest_framework import serializers
 
+from houmer.utils.db_tools import wait_and_process_transaction
+from houmer.utils.common_utilities import CommonUtilities
+
 from houmer.errors.common_error import BadRequest, NotFound
 from houmer.models import Property, Houmer
 
 
 class PropertyService(object):
 
+    @wait_and_process_transaction()
     def create(self, request, user):
-
         form = CreatePropertyValidation(data=request.data)
         if not form.is_valid():
             raise BadRequest.setDetail(None, form.errors)
@@ -18,14 +21,14 @@ class PropertyService(object):
         except Exception:
             raise NotFound.setDetail(None, "Houmer")
 
-        propertySaved = Property.objects.create(
+        property_saved = Property.objects.create(
             name=request.data.get('name', None),
             coordinates=request.data.get('coordinates', None),
             houmer=houmer)
 
-        return propertySaved
+        return property_saved
 
-    def list_by_logged(self, user):
+    def list_by_logged(self, request, user):
 
         houmer = None
         try:
@@ -33,7 +36,10 @@ class PropertyService(object):
         except Exception:
             raise NotFound.setDetail(None, "Houmer")
 
-        properties = Property.objects.filter(houmer=houmer)
+        page, limit = CommonUtilities.get_page_limit(request)
+
+        properties = Property.objects.filter(
+            houmer=houmer)[(page-1)*limit:page*limit]
 
         return properties
 

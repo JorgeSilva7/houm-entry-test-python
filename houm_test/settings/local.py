@@ -17,7 +17,7 @@ DATABASES = {
         'PASSWORD': os.getenv("DB_PASSWORD"),
         'HOST': os.getenv("DB_HOST"),
         'PORT': os.getenv("DB_PORT")
-    }
+    },
 }
 
 SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'] = timedelta(days=30)

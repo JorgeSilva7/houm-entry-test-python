@@ -22,8 +22,8 @@ class PropertyView(viewsets.ModelViewSet):
     def list_by_logged(self, request, *args, **kwargs):
 
         user = CommonUtilities.get_user(request)
-        service_response = PropertyService().list_by_logged(user)
+        service_response = PropertyService().list_by_logged(request, user)
 
         to_response = PropertySerializer(service_response, many=True).data
 
-        return Response(to_response, status.HTTP_201_CREATED)
+        return Response(to_response, status.HTTP_200_OK)

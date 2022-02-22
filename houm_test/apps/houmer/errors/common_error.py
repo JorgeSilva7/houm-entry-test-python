@@ -20,6 +20,20 @@ class InternalError(APIException):
             return InternalError
 
 
+class NotAcceptable(APIException):
+    status_code = 406
+    default_detail = 'A value is not accepted or request is not accepted'
+    default_code = 'common_not_acceptable'
+
+    def setDetail(self, error=None):
+        if error:
+            e = APIException(detail=str(error))
+            e.status_code = 406
+            return e
+        else:
+            return NotAcceptable
+
+
 class BadRequest(APIException):
     status_code = 400
     default_detail = 'An error exists in the request (BAD REQUEST)'

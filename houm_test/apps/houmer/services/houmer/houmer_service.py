@@ -4,12 +4,14 @@ from django.urls import reverse
 from rest_framework import serializers
 from houmer.models import Houmer
 from django.contrib.auth.models import User
+from houmer.utils.db_tools import wait_and_process_transaction
 
 from houmer.errors.common_error import BadRequest
 
 
 class HoumerService(object):
 
+    @wait_and_process_transaction()
     def create(self, request):
         urls = {
             'rest_register': request.build_absolute_uri(reverse('rest_register'))
@@ -30,7 +32,6 @@ class HoumerService(object):
         }
         response = requests.post(url, data=payload)
         if response.status_code != 201:
-            print(response.text)
             raise BadRequest(response.text)
 
         created_user = User.objects.get(username=username)

@@ -9,7 +9,7 @@ class Houmer(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return '{}'.format(self.name)
 
     class Meta:
         app_label = 'houmer'

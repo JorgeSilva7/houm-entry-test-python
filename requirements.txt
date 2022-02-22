@@ -3,6 +3,7 @@ autopep8==1.6.0
 certifi==2021.10.8
 cffi==1.15.0
 charset-normalizer==2.0.12
+coverage==6.3.2
 cryptography==36.0.1
 defusedxml==0.7.1
 dj-rest-auth==2.2.3
@@ -16,6 +17,7 @@ idna==3.3
 importlib-metadata==4.11.1
 Markdown==3.3.6
 oauthlib==3.2.0
+psycopg2==2.9.3
 pycodestyle==2.8.0
 pycparser==2.21
 PyJWT==2.3.0
