@@ -2,15 +2,21 @@
 
 Houm entry test developed with python and django rest framework with MVC pattern
 
-## Endpoints documentation
-
-- /api-docs (swagger)
-
 ## Environment vars
 
+CREATE ENVIRONMENT FILE IN: houm_test/secrets/.project_secrets OR set environments with other method
+
 ```plaintext
-SECRET_JWT=strong_jwt_secret
-ENV=dev
+#EXAMPLE SECRETS
+JWT_SECRET_KEY=aasdasdsadsad12q3123123asdasdsada
+ENV=local
+SECRET_KEY=django-insecure-rl&9abukg_b7eu_pv_r^2kgp5^awd)9$*i=0m+2nj564c55e1)
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=houm_test
+DB_USER=user
+DB_PASSWORD=password
+DB_HOST=db
+DB_PORT=5432
 ```
 
 ## Execution
@@ -18,12 +24,15 @@ ENV=dev
 ```plaintext
 
 - docker-compose -f docker-compose.dev.yml up
+- docker exec -it CONTAINER_NAME python migrate.py migrate
 
 or manually (without docker)
 
 - create python env: venv name_environment
 - pip install -r requirements.txt
--
+- python manage.py migrate
+- python manage.py makemigrations
+- python manage.py runserver 0.0.0.0:8002
 
 For production:
 docker build .
@@ -33,10 +42,11 @@ docker run -p 8002:8002 <id_of_builded>
 
 ## Tests
 
-Execute tests with this commands
+Execute tests with this commands on docker with 'exec' command or without docker
 
 ```
-- TODO
+- coverage run --source='.' manage.py test houmer
+- coverage report
 ```
 
 ## informacion adicional
@@ -57,6 +67,13 @@ por hora.
 
 Entonces, con esto es necesario estar logueado como houmer, crear dos propiedades y luego realizar una visita, finalizar
 la visita y luego visitar la otra propiedad para que se hagan los calculos al utilizar los endpoints.
-Estos endpoints estan disponible en formato postman en el archivo postman.json para ser importados o viendolos en swagger
+Estos endpoints estan disponible en formato postman en el archivo Houm-test python.postman_collection.json para ser importados
+
+Trabajo futuro
+
+- swagger (me falto tiempo para crear los yml o autodetectando en código)
+- test unitarios por methodos (me falto tiempo para estudiar test unitarios con django)
+
+Proyecto también disponible con typescript, swagger, test, arquitectura hexagonal (clean) en: https://github.com/JorgeSilva7/houm-entry-test
 
 Jorge Silva - 2022

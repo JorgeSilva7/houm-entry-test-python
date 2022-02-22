@@ -32,7 +32,6 @@ class HoumerService(object):
         }
         response = requests.post(url, data=payload)
         if response.status_code != 201:
-            print(response.text)
             raise BadRequest(response.text)
 
         created_user = User.objects.get(username=username)

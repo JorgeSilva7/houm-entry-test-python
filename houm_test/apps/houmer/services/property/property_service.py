@@ -11,7 +11,6 @@ class PropertyService(object):
 
     @wait_and_process_transaction()
     def create(self, request, user):
-
         form = CreatePropertyValidation(data=request.data)
         if not form.is_valid():
             raise BadRequest.setDetail(None, form.errors)

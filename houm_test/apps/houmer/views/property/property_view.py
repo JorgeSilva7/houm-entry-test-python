@@ -26,4 +26,4 @@ class PropertyView(viewsets.ModelViewSet):
 
         to_response = PropertySerializer(service_response, many=True).data
 
-        return Response(to_response, status.HTTP_201_CREATED)
+        return Response(to_response, status.HTTP_200_OK)

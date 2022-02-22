@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"juansilva\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"username\": \"jsilva3\",\r\n    \"password\": \"123asd123asd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"te\",\r\n    \"username\": \"jsilva2\",\r\n    \"password1\": \"cokedark123\",\r\n    \"password2\": \"cokedark123\"\r\n}",
+							"raw": "{\r\n    \"name\": \"jorge\",\r\n    \"username\": \"jsilva3\",\r\n    \"password1\": \"123asd\",\r\n    \"password2\": \"123asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -139,7 +139,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8002/v1/properties/",
+							"raw": "http://localhost:8002/v1/properties?page=1&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -147,8 +147,17 @@
 							"port": "8002",
 							"path": [
 								"v1",
-								"properties",
-								""
+								"properties"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								}
 							]
 						}
 					},
@@ -160,7 +169,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MDA0NjA2LCJpYXQiOjE2NDU0MTI2MDYsImp0aSI6IjA5MTc0NzdjY2IxNTQ1ZDFiOTNjYjViMDRkMjBiYWI4IiwidXNlcl9pZCI6MX0.PvtIkxFdeZAvzR7S9-c4V2aLkqoWBJgkzd_7JrDVw48",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MTUxMTYyLCJpYXQiOjE2NDU1NTkxNjIsImp0aSI6Ijg0M2JjNTk2NDQ1ZTRiNDM5NmRiMjlkYjNjOWY2YTk2IiwidXNlcl9pZCI6M30.1HIrlSgfBin9-6zX9Otl-XF7UIQq_C4NuSwlIR7oICQ",
 						"type": "string"
 					}
 				]
@@ -226,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"property\": 2\r\n}",
+							"raw": "{\r\n    \"property_id\": 2\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -234,14 +243,16 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:5002/visits",
+							"raw": "http://localhost:8002/v1/visits/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "5002",
+							"port": "8002",
 							"path": [
-								"visits"
+								"v1",
+								"visits",
+								""
 							]
 						}
 					},
@@ -309,7 +320,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8002/v1/visits?day=2022-02-21&type=visit_duration&page=1&limit=1",
+							"raw": "http://localhost:8002/v1/visits?day=2022-02-21&type=visit_duration&page=1&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -334,7 +345,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "1"
+									"value": "10"
 								}
 							]
 						}
@@ -359,7 +370,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8002/v1/visits?day=2022-01-01&type=move_speed&min_speed=10&page=1&limit=1",
+							"raw": "http://localhost:8002/v1/visits?day=2022-02-21&type=move_speed&min_speed=5&page=1&limit=10",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -372,7 +383,7 @@
 							"query": [
 								{
 									"key": "day",
-									"value": "2022-01-01"
+									"value": "2022-02-21"
 								},
 								{
 									"key": "type",
@@ -380,7 +391,7 @@
 								},
 								{
 									"key": "min_speed",
-									"value": "10"
+									"value": "5"
 								},
 								{
 									"key": "page",
@@ -388,7 +399,7 @@
 								},
 								{
 									"key": "limit",
-									"value": "1"
+									"value": "10"
 								}
 							]
 						}
@@ -401,7 +412,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MDgxNTAxLCJpYXQiOjE2NDU0ODk1MDEsImp0aSI6ImYzZDBlMjBmZGUzZDQwNjdiZTAxY2FiYTQ5ODdlYjI1IiwidXNlcl9pZCI6M30.bLnuw4H0bQ0JmlcV2ncRiQYeB_uAQeGH7cb3QCuuSV4",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQ4MTUxMTYyLCJpYXQiOjE2NDU1NTkxNjIsImp0aSI6Ijg0M2JjNTk2NDQ1ZTRiNDM5NmRiMjlkYjNjOWY2YTk2IiwidXNlcl9pZCI6M30.1HIrlSgfBin9-6zX9Otl-XF7UIQq_C4NuSwlIR7oICQ",
 						"type": "string"
 					}
 				]

@@ -27,7 +27,7 @@ class VisitView(viewsets.ModelViewSet):
 
         to_response = VisitSerializer(service_response).data
 
-        return Response(to_response, status.HTTP_201_CREATED)
+        return Response(to_response, status.HTTP_200_OK)
 
     def getByHoumer(self, request, *args, **kwargs):
 
