@@ -58,7 +58,6 @@ class VisitService(object):
         except Exception:
             raise NotFound.setDetail(None, "Visit")
 
-        print(visit.end_date)
         if visit.end_date != None:
             raise NotAcceptable("Visit already has a end date")
 
@@ -75,13 +74,25 @@ class VisitService(object):
 
         visits = self.get_visits_by_day(user, request)
 
+        for visit in visits:
+            diff = visit.end_date - visit.start_date
+            diff = diff.total_seconds()
+            minutes, seconds = CommonUtilities.millisToMinutesAndSeconds(diff)
+            visit.visit_duration = "{} minutes and {} seconds".format(minutes, seconds)
+        
         return visits
 
     def list_by_logged_with_move_duration(self, user, request):
 
         visits = self.get_visits_by_day(user, request)
-
-        return visits
+        
+        visits_return = []
+        for i, visit in enumerate(visits):
+            if len(visits) > i + 1:
+                visit.move_speed = '{0:.2f} km/hr'.format(self.calculate_speed(visit, visits[i+1]))
+                visits_return.append(visit)
+        
+        return visits_return
 
     def get_visits_by_day(self, user, request):
         houmer = None
@@ -101,9 +112,19 @@ class VisitService(object):
 
         page, limit = CommonUtilities.get_page_limit(request)
 
-        # Obtener start_date and end_date
-        return Visit.objects.filter(houmer=houmer)[(page-1)*limit:page*limit]
+        # Obtener entre start_date and end_date
+        return Visit.objects.filter(houmer=houmer).order_by('-end_date')[(page-1)*limit:page*limit]
 
+    def calculate_speed(self, visitEnd: Visit, visitInit: Visit):
+        """ Calculate speed between two points in specific time in earth"""
+
+        #Calculate linear distance between two points in earth with haversine method
+        distance = CommonUtilities.haversine(visitEnd.property.coordinates, visitInit.property.coordinates)
+
+        #Calculate difference between start date last visit and end date before visit
+        date_diff = (visitEnd.start_date - visitInit.end_date).total_seconds() / 60 / 60
+        
+        return distance/date_diff
 
 class CreateVisitValidation(serializers.Serializer):
     property_id = serializers.IntegerField(required=True, min_value=0)
