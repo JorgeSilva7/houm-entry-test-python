@@ -75,14 +75,11 @@ class VisitService(object):
 
         visits = self.get_visits_by_day(user, request)
 
-        # TODO obtener duracion de cada una
-
         return visits
 
     def list_by_logged_with_move_duration(self, user, request):
 
         visits = self.get_visits_by_day(user, request)
-        # TODO obtener duracion de movimiento
 
         return visits
 
